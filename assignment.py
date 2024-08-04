@@ -298,6 +298,13 @@ def print_all():
 print_all()
 
 # add: if user input add then it should further ask for a country name to add. If country already exist in our dataset then it should print that it exist and do nothing. If it doesn't then it asks for population and add that new country/population in our dictionary and print it
+population = {
+    "chaina" : 143,
+    "india" : 136,
+    "usa" : 32,
+    "pakistan" : 21
+}
+
 def add():
     country = input("enter the name of country which you want to add in dictionary : ")
     country = country.lower()
@@ -307,3 +314,216 @@ def add():
     p = float(input(f"enter the population of the company{country}"))
     population[country]=p
     print_all()
+
+def remove():
+    country = input("enter the name of country which you want to remove from dictionary : ")
+    country = country.lower()
+    if country not in population:
+        print("Country does not exist in our dataset. Terminating")
+        return
+    del population[country]
+    print_all()
+
+def query():
+    country = input("enter the name of country which you want to query from dictionary : ")
+    country = country.lower()
+    if country not in population:
+        print("Country does not exist in our dataset. Terminating")
+        return
+    print(f"population of {country} is {population[country]}")
+
+
+def print_all():
+    for country,p in population.items():
+        print(f"{country} ==> {p}")
+
+def main():
+    op=input("Enter the operation(add,remove,query or print)")
+    if op.lower() == "add":
+        add()
+    elif op.lower() == "remove":
+        remove()
+    elif op.lower() == "query":
+        query()
+    elif op.lower() == "print":
+        print_all()
+    else:
+        print("Invalid operation. Terminating")
+
+if __name__ == '__main__':
+    main()
+
+population = {
+    "chaina" : 143,
+    "india" : 136,
+    "usa" : 32,
+    "pakistan" : 21
+}
+
+def add():
+    country = input("enter the name of country which you want to add in dictionary : ")
+    country = country.lower()
+    if country in population:
+        print("Country already exist in our dataset. Terminating")
+        return
+    p = float(input(f"enter the population of the company{country}"))
+    population[country]=p
+    print_all()
+
+def remove():
+    country = input("enter the name of country which you want to remove from dictionary : ")
+    country = country.lower()
+    if country not in population:
+        print("Country does not exist in our dataset. Terminating")
+        return
+    del population[country]
+    print_all()
+
+def query():
+    country = input("enter the name of country which you want to query from dictionary : ")
+    country = country.lower()
+    if country not in population:
+        print("Country does not exist in our dataset. Terminating")
+        return
+    print(f"population of {country} is {population[country]}")
+
+
+def print_all():
+    for country,p in population.items():
+        print(f"{country} ==> {p}")
+
+def main():
+    op=input("Enter the operation(add,remove,query or print)")
+    if op.lower() == "add":
+        add()
+    elif op.lower() == "remove":
+        remove()
+    elif op.lower() == "query":
+        query()
+    elif op.lower() == "print":
+        print_all()
+    else:
+        print("Invalid operation. Terminating")
+
+if __name__ == '__main__':
+    main()
+
+
+# You are given following list of stocks and their prices in last 3 days,
+
+# Stock	Prices
+# info	[600,630,620]
+# ril	[1430,1490,1567]
+# mtl	[234,180,160]
+# Write a program that asks user for operation. Value of operations could be,
+# print: When user enters print it should print following,
+# info ==> [600, 630, 620] ==> avg:  616.67
+# ril ==> [1430, 1490, 1567] ==> avg:  1495.67
+# mtl ==> [234, 180, 160] ==> avg:  191.33
+
+# add: When user enters 'add', it asks for stock ticker and price. If stock already exist in your list (like info, ril etc) then it will append the price to the list. Otherwise it will create new entry in your dictionary. For example entering 'tata' and 560 will add tata ==> [560] to the dictionary of stocks.
+import statistics
+
+stocks = {
+    "info" : [600,630,620],
+    "ril" : [1430,1490,1567],
+    "mlt" : [234,180,160]
+}
+
+def print_all():
+    for stock,price_list in stocks.items():
+        avg = statistics.mean(price_list)
+        print(f"{stock} ==> {price_list} ==> avg: {round(avg,2)}")
+
+def add():
+    stock = input("Enter stock name: ")
+    price = float(input("Enter price: "))
+    if stock in stocks:
+        stocks[stock].append(price)
+    else:
+        stocks[stock] = [price]
+    print_all()
+
+def main():
+    op = input("Enter operation (print,add and amend)")
+    if op.lower() == "print":
+        print_all()
+    elif op.lower() == "add":
+        add()
+    else:
+        print("Invalid operation")
+
+if __name__ == "__main__":
+    main()
+
+# Write circle_calc() function that takes radius of a circle as an input from user and then it calculates and returns area, circumference and diameter. You should get these values in your main program by calling circle_calc function and then print them
+import math
+
+def circle_cal(r):
+    area = math.pi*pow(r,2)
+    curcumference = 2*math.pi*r
+    diameter = 2*r
+    return area, curcumference, diameter
+
+def main():
+    radius = float(input("Enter the value of the radius"))
+    area, curcumference, diameter = circle_cal(radius)
+    print("Area of the circle is: ", round(area,2))
+    print("Circumference of the circle is: ", round(curcumference,2))
+    print("Diameter of the circle is: ", round(diameter))
+
+if __name__ == "__main__":
+    main()
+
+# 13.0
+
+# poem.txt contains famous poem "Road not taken" by poet Robert Frost. You have to read this file in your python program and find out words with maximum occurance.
+from collections import Counter
+import re
+
+def find_max_occurrence_word(file_path):
+    with open(file_path, "r") as f:
+        poem = f.read()
+    
+    print("Original poem text:\n", poem)
+    
+    poem = re.sub(r'[^\w\s]', '', poem).lower()
+    print("Poem text after removing punctuation and converting to lowercase:\n", poem)
+    
+    words = poem.split()
+    print("List of words in the poem:\n", words)
+    
+    word_count = Counter(words)
+    print("Word count:\n", word_count)
+    
+    if word_count:
+        max_occ = max(word_count.values())
+    
+        max_words = [word for word, count in word_count.items() if count == max_occ]
+    
+        print(f'Words with maximum occurrence ({max_occ} times): {max_words}')
+    else:
+        print("The poem contains no words to count.")
+
+file_path = r"D:\python\Python\poem.txt"
+
+find_max_occurrence_word(file_path)
+
+# stocks.csv contains stock price, earnings per share and book value. You are writing a stock market application that will process this file and create a new file with financial metrics such as pe ratio and price to book ratio. These are calculated as,
+# pe ratio = price / earnings per share
+# price to book ratio = price / book value
+# Your input format (stocks.csv) is,
+
+# Company Name	Price	Earnings Per Share	Book Value
+# Reliance	1467	66	653
+# Tata Steel	391	89	572
+# Output.csv should look like this,
+
+# Company Name	PE Ratio	PB Ratio
+# Reliance	22.23	2.25
+# Tata Steel	4.39	0.68
+
+
+
+
+
