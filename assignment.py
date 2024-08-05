@@ -523,7 +523,105 @@ find_max_occurrence_word(file_path)
 # Reliance	22.23	2.25
 # Tata Steel	4.39	0.68
 
+with open (r"D:\python\Python\stocks.csv","r") as f , open(r"D:\python\Python\output.csv","w") as out:
+    out.write("company name,PE ratio,PB ratio \n")
+    next(f)
+    for line in f:
+        tokens = line.split(",")
+        stock = tokens[0]
+        price = float(tokens[1])
+        esp = float(tokens[2])
+        book = float(tokens[3])
+        pe = round(price/esp,2)
+        pb = round(price/book,2)
+        out.write(f"{stock},{pe},{pb}\n")
 
+# 16.
+# Create a sample class named Employee with two attributes id and name
+# employee :
+#     id
+#     name
+# object initializes id and name dynamically for every Employee object created.
+
+# emp = Employee(1, "coder")
+# Use del property to first delete id attribute and then the entire object
+class employee():
+    def __init__(self,id,name):
+        self.id=id
+        self.name=name
+
+
+emp = employee(1,"coder")
+print(emp.id)
+print(emp.name)
+
+del emp.id
+
+try:
+    print(emp.id)
+except Exception as e:
+    print(e)
+
+del emp
+
+try:
+    print(emp.id)
+except Exception as e:
+    print(e)
+
+# 17.
+# create inheritance using animal Dog relation.
+# for example, 
+#     Animal and Dog both has same habitat so create a method for habitat 
+class animal():
+    def __init__(self,habitate):
+        self.habitat = habitate
+
+    def print_habidate(self):
+        print(self.habitat)
+
+    def sound(self):
+        print("The animal makes a sound")
+
+class dog(animal):
+    def __init__(self):
+        super().__init__("kennel")
+
+    def sound(self):
+        
+        print("The dog barks")
+
+x = dog()
+x.print_habidate()
+x.sound()
+
+# use super() constructor for calling parent constructor.
+# class Animal:
+#     #code
+
+# class Dog(Animal):
+#     super()-it refers Animal class,now you can call Animal's methods.
+class animal():
+    def __init__(self,habitate):
+        self.habitat = habitate
+
+    def print_habidate(self):
+        print(self.habitat)
+
+    def sound(self):
+        print("The animal makes a sound")
+
+class dog(animal):
+    def __init__(self):
+        super().__init__("kennel")
+
+    def sound(self):
+        super().sound() #inherited method
+        print("The dog barks")
+
+x = dog()
+x.print_habidate()
+x.sound()
 
 
 
