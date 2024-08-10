@@ -623,5 +623,75 @@ x = dog()
 x.print_habidate()
 x.sound()
 
+# 18.
+# Create multiple inheritance on teacher,student and youtuber.
+# Q. if we have created teacher and now one student joins master degree with becoming teacher then what??
 
+# Ans :  just make subclass from  teacher so that student will become teacher
+# Now student is teacher as well as youtuber then what???
+# -just use multiple inheritance for these three relations
 
+class teacher:
+    def teacherAction(self):
+        print("i can teach")
+
+class student:
+    def studentAction(self):
+        print("i can learn")    
+
+class youtuber:
+    def youtuberAction(self):
+        print("i can teach and learn")
+
+class person(teacher,student,youtuber):
+    pass
+
+coder = person()
+coder.teacherAction()
+coder.studentAction()
+coder.youtuberAction()
+
+# 19.
+# Create a custom exception AdultException.
+
+# Create a class Person with attributes name and age in it.
+
+# Create a function get_minor_age() in the class. It throws an exception if the person is adult otherwise returns age.
+
+# Create a function display_person() which prints the age and name of a person.
+
+# let us say,
+
+# if age>18 
+#     he is major
+# else
+#     raise exception
+
+# create cusomException named ismajor and raise it if age<18.
+class AdultException(Exception):
+    pass
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def get_minor_age(self):
+        if int(self.age) >= 18:
+            raise AdultException
+        else:
+            return self.age
+
+    def display(self):
+        try:
+            print(f"Minor Age: {self.get_minor_age()}")
+        except AdultException:
+            print("Age is greater than 18")
+        finally:
+            print(f"name -> {self.name}")
+
+p1 = Person("Bhavin", 17)
+p1.display()
+
+p2 = Person("Dhaval", 23)
+p2.display()

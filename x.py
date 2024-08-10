@@ -1,21 +1,27 @@
-class animal():
-    def __init__(self,habitate):
-        self.habitat = habitate
+class AdultException(Exception):
+    pass
 
-    def print_habidate(self):
-        print(self.habitat)
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-    def sound(self):
-        print("The animal makes a sound")
+    def get_minor_age(self):
+        if int(self.age) >= 18:
+            raise AdultException
+        else:
+            return self.age
 
-class dog(animal):
-    def __init__(self):
-        super().__init__("kennel")
+    def display(self):
+        try:
+            print(f"Minor Age: {self.get_minor_age()}")
+        except AdultException:
+            print("Age is greater than 18")
+        finally:
+            print(f"name -> {self.name}")
 
-    def sound(self):
-        super().sound() #inherited method
-        print("The dog barks")
+p1 = Person("Bhavin", 17)
+p1.display()
 
-x = dog()
-x.print_habidate()
-x.sound()
+p2 = Person("Dhaval", 23)
+p2.display()
